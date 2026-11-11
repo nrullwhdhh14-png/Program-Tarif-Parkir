@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Program Tarif Parkir</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffb6c9, #ffe5ed, #ffccd5);
+    min-height: 100vh;
+    padding: 25px 15px;
+    color: #8b1738;
+}
+
+.container {
+    max-width: 450px;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.emoji {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.header h1 {
+    color: #d81b60;
+    font-size: 34px;
+    text-shadow: 2px 2px 5px white;
+}
+
+.header p {
+    color: #a83255;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 22px;
+    border: 2px solid #ff8fab;
+    box-shadow: 0 8px 25px rgba(190, 20, 75, 0.18);
+}
+
+.card h2 {
+    text-align: center;
+    color: #d81b60;
+    margin-bottom: 22px;
+    font-size: 21px;
+}
+
+label {
+    display: block;
+    margin: 15px 0 8px;
+    font-weight: bold;
+    color: #b51e4d;
+    font-size: 14px;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #ffb3c6;
+    border-radius: 12px;
+    background: #fff5f8;
+    color: #8b1738;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: #e91e63;
+    box-shadow: 0 0 7px #ffb3c6;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 22px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff4d79, #d50045);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 12px rgba(213, 0, 69, 0.2);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #e91e63, #ad0038);
+}
+
+.hasil {
+    background: #fff0f4;
+    border: 2px dashed #f06292;
+    padding: 16px;
+    border-radius: 14px;
+    margin-top: 20px;
+    text-align: center;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+}
+
+.hasil h3 {
+    color: #d50045;
+    margin-bottom: 8px;
+}
+
+.total {
+    font-size: 26px;
+    font-weight: bold;
+    color: #d50045;
+    margin: 8px 0;
+}
+
+.error {
+    color: #c62828;
+    font-weight: bold;
+}
+
+.tarif {
+    background: linear-gradient(135deg, white, #ffe1e9);
+    padding: 20px;
+    border-radius: 17px;
+    border: 2px solid #ff9db5;
+    margin-top: 18px;
+    line-height: 2;
+    box-shadow: 0 5px 15px rgba(190, 20, 75, 0.12);
+}
+
+.tarif h3 {
+    color: #d50045;
+    margin-bottom: 8px;
+}
+
+.tarif p {
+    color: #922044;
+}
+
+.anggota {
+    background: white;
+    padding: 20px;
+    border-radius: 17px;
+    border: 2px solid #ff8fab;
+    margin-top: 18px;
+    box-shadow: 0 5px 15px rgba(190, 20, 75, 0.12);
+}
+
+.anggota h3 {
+    text-align: center;
+    color: #d50045;
+    margin-bottom: 15px;
+}
+
+.anggota ol {
+    padding-left: 25px;
+    line-height: 2.2;
+    color: #9e2450;
+    font-weight: bold;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    color: #a83255;
+    font-size: 12px;
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 18px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="emoji">🚗 🛵</div>
+        <h1>Tarif Parkir</h1>
+        <p>Program Menghitung Biaya Parkir Kendaraan</p>
+    </div>
+
+    <div class="card">
+        <h2>🅿️ Hitung Biaya Parkir</h2>
+
+        <label for="kendaraan">Jenis Kendaraan</label>
+        <select id="kendaraan">
+            <option value="Mobil">🚗 Mobil</option>
+            <option value="Motor">🛵 Motor</option>
+        </select>
+
+        <label for="lamaParkir">Lama Parkir (Jam)</label>
+        <input
+            type="number"
+            id="lamaParkir"
+            min="1"
+            step="1"
+            placeholder="Masukkan lama parkir"
+        >
+
+        <button onclick="hitungParkir()">
+            💗 Hitung Tarif Parkir
+        </button>
+
+        <div id="hasil" class="hasil">
+            <p>✨ Hasil perhitungan akan muncul di sini.</p>
+        </div>
+    </div>
+
+    <div class="tarif">
+        <h3>📋 Daftar Tarif Parkir</h3>
+        <p>🕐 Jam pertama : <b>Rp3.000</b></p>
+        <p>⏰ Jam berikutnya : <b>Rp2.000/jam</b></p>
+    </div>
+
+    <div class="anggota">
+        <h3>🌸 Anggota Kelompok 🌸</h3>
+        <ol>
+            <li>Dina Andriani</li>
+            <li>Aqilah Syafiah</li>
+            <li>Aswatiindah</li>
+            <li>Miftahul Resky</li>
+        </ol>
+    </div>
+
+    <div class="footer">
+        <p>💗 Program Tarif Parkir Kendaraan 💗</p>
+        <p>Terima kasih telah menggunakan program kami!</p>
+    </div>
+
+</div>
+
+<script>
+function hitungParkir() {
+
+    const kendaraan = document.getElementById("kendaraan").value;
+    const inputJam = document.getElementById("lamaParkir").value;
+    const lamaParkir = Number(inputJam);
+    const hasil = document.getElementById("hasil");
+
+    // Validasi input
+    if (
+        inputJam.trim() === "" ||
+        !Number.isInteger(lamaParkir) ||
+        lamaParkir <= 0
+    ) {
+        hasil.innerHTML = `
+            <p class="error">
+                ⚠️ Masukkan angka bulat minimal 1 jam!
+            </p>
+        `;
+        return;
+    }
+
+    // Menghitung tarif parkir
+    let tarif;
+
+    if (lamaParkir === 1) {
+        tarif = 3000;
+    } else {
+        tarif = 3000 + (lamaParkir - 1) * 2000;
+    }
+
+    // Menampilkan hasil
+    hasil.innerHTML = `
+        <h3>💗 Hasil Perhitungan</h3>
+        <p>Kendaraan: <b>${kendaraan}</b></p>
+        <p>Lama Parkir: <b>${lamaParkir} Jam</b></p>
+        <p>Tarif Jam Pertama: Rp3.000</p>
+        <p>Tarif Jam Berikutnya: Rp2.000</p>
+        <hr>
+        <p>Total Biaya Parkir:</p>
+        <div class="total">
+            Rp${tarif.toLocaleString("id-ID")}
+        </div>
+        <p>Terima kasih telah menggunakan layanan kami! 💗</p>
+    `;
+}
+</script>
+
+</body>
+  </html>
